@@ -3,24 +3,24 @@
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            New author
+            Новый альбом
         </div>
         <div>
-            <form method="POST" action="/authors">
+            <form method="POST" action="/albums">
                 @csrf
-                <label for="first">Name</label>
+                <label for="name">Название</label>
                 <input type="text"
                        class="form-control"
-                       id="first"
-                       name="first"
-                       placeholder=" first">
+                       id="name"
+                       name="name"
+                       placeholder=" Название">
                 <br><br>
-                <label for="last">last</label>
+                <label for="description">Описание</label>
                 <input type="text"
                        class="form-control"
-                       id="last"
-                       name="last"
-                       placeholder=" last">
+                       id="description"
+                       name="description"
+                       placeholder=" Описание">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

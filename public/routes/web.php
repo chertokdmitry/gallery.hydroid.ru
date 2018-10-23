@@ -11,30 +11,18 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Route::get('/', 'IndexController@index');
 
-Route::get('/about', function () {
-    return view('default');
-});
+Route::resource('/home', 'Admin\AlbumsResource')->middleware('auth');
+Route::resource('/albums', 'Admin\AlbumsResource')->middleware('auth');
 
-Route::delete('books/{id}', [
-    'as' => 'delete_book',
-    'uses' => 'Admin\BooksResource@destroy'
-]);
+Route::resource('/photos', 'Admin\PhotosResource')->middleware('auth');
 
-Route::resource('/home', 'Admin\AlbumResource')->middleware('auth');
-Route::resource('/authors', 'Admin\AuthorsResource')->middleware('auth');
+Route::get('/albums/view/{id}', 'Admin\AlbumsResource@view')->middleware('auth');
 
 Auth::routes();
 
 Route::get('/users', ['middleware' => ['auth'], 'uses'=>'Core@show']);
-
-
-
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 

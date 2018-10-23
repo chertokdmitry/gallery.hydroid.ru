@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Photo;
+use App\Album;
 
-class AlbumResource extends Controller
+class PhotosResource extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +16,7 @@ class AlbumResource extends Controller
      */
     public function index()
     {
-        $book = 'dimas';
-        $view = view('albums', ['book' => $book])->render();
-        return (new Response($view));
+        //
     }
 
     /**
@@ -37,7 +37,16 @@ class AlbumResource extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $photoName = time().'.'.$request->userfile->getClientOriginalExtension();
+        $request->userfile->move(public_path('photos'), $photoName);
+
+        $item = new Photo;
+        $item->name = $request->name;
+        $item->url = $photoName;
+        $item->album_id = $request->album;
+        $item->save();
+
+        return redirect('/albums/view/'. $request->album);
     }
 
     /**
