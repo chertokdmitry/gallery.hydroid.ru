@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $items = Album::with('photos')->paginate(6);
+        $items = Album::with('photos')->paginate(9);
 
         foreach ($items as $item) {
 
