@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Album extends Model
 {
     public function photos() {
-        return $this->belongsToMany('App\Photo');
+        return $this->hasMany('App\Photo');
     }
 }

@@ -13,6 +13,8 @@
 
 Route::get('/', 'IndexController@index');
 
+Route::get('/album/{id}', 'PhotosController@index');
+
 Route::resource('/home', 'Admin\AlbumsResource')->middleware('auth');
 Route::resource('/albums', 'Admin\AlbumsResource')->middleware('auth');
 

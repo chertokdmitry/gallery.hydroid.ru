@@ -3,23 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
-use App\Photo;
+use App\Album;
+
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $data = [];
-        $items = Photo::all();
+        $items = Album::with('photos')->paginate(6);
 
         foreach ($items as $item) {
 
-            $data[] = ['id' => $item->id,
-                'title' => $item->title,
-                'url' => $item->url];
-        }
+            $photo = $item->photos->last();
 
-        $view = view('main', ['items' => $data])->render();
+        }
+        $view = view('main', ['items' => $items])->render();
         return (new Response($view));
     }
 }
