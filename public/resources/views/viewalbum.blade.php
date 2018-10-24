@@ -4,8 +4,11 @@
     <div class="content">
         <div class="title m-b-md">
            <h3>{{ $albumTitle }}</h3>
+            <br>
         </div>
-        <div>
+        <div class="alert alert-secondary" role="alert">
+            <h5>Добавить фото</h5>
+            <br>
                         <form action="/photos" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="album" value="{{ $album }}">
                             @csrf
@@ -20,9 +23,12 @@
                             <br><br>
                             <input type="submit" value="Загрузить" name="submit">
                         </form>
-        </div>
 
+        </div>
+        <br>
+        <br>
             <div class="card-deck" style="margin-bottom: 1rem">
+
                 @foreach ($items as $item)
 
                     <div class="card" style="min-width: 240px;">

@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Book;
+use App\Photo;
 
 class IndexController extends Controller
 {
     public function index()
     {
         $data = [];
-        $books = Book::with('author')->get();
+        $items = Photo::all();
 
-        foreach ($books as $book) {
+        foreach ($items as $item) {
 
-            $data[] = ['id' => $book->id,
-                'title' => $book->title,
-                'author_name' => $book->author->first . ' ' . $book->author->last];
+            $data[] = ['id' => $item->id,
+                'title' => $item->title,
+                'url' => $item->url];
         }
 
-        $view = view('page', ['books' => $data])->render();
+        $view = view('main', ['items' => $data])->render();
         return (new Response($view));
     }
 }

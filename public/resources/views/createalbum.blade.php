@@ -3,9 +3,10 @@
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            Новый альбом
+            <h3>Новый альбом</h3>
         </div>
         <div>
+            <br><br>
             <form method="POST" action="/albums">
                 @csrf
                 <label for="name">Название</label>
@@ -21,6 +22,7 @@
                        id="description"
                        name="description"
                        placeholder=" Описание">
+                <br><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

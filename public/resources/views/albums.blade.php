@@ -3,23 +3,15 @@
 @section('content')
     <div class="content">
         <div class="title m-b-md">
-            Albums
+            <h3>Альбомы</h3>
         </div>
 
         <div>
-            <table>
+            <table class="table">
                 <tr>
-                    <td>
-                        <a href="/albums/create">
-                            <button type="button" class="btn btn-warning">+ add</button>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Author ID</th>
-                    <th>Description</th>
+                    <th>Id</th>
+                    <th>Название</th>
+                    <th>Описание</th>
                 </tr>
 
                 @foreach ($items as $item)
