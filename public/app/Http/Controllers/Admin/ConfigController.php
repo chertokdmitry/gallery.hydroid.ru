@@ -5,22 +5,27 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigController extends Controller
 {
     public function index()
     {
-        $view = view('config')->render();
+        $user = Auth::user();
+
+        $view = view('config', ['album_order' => $user->album_order,
+            'photo_order' => $user->photo_order])->render();
         return (new Response($view));
     }
 
     public function store(Request $request)
     {
-        $response = new Response(view('home'));
-        $response->withCookie(cookie('albums', $request->albums, 45000));
-        $response->withCookie(cookie('albums_direction', $request->albums_direction, 45000));
-        $response->withCookie(cookie('photos', $request->photos, 45000));
-        $response->withCookie(cookie('photos_direction', $request->photos_direction, 45000));
-        return $response;
+        $user = Auth::user();
+        if($request->albums) $user->album_order = $request->albums;
+        if($request->photos) $user->photo_order = $request->photos;
+        $user->save();
+
+        $view = view('home', ['message' => "Данные записаны"])->render();
+        return (new Response($view));
     }
 }

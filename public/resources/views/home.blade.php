@@ -13,7 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                        @if ($message)
+                            {{ $message }}
+                        @endif
                     You are logged in!
                 </div>
             </div>

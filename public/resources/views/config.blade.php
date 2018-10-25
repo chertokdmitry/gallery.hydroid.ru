@@ -12,7 +12,7 @@
                     <div>
                         <input type="radio" id="1"
                                name="albums" value="updated_at"
-                               @if(Cookie::get('albums') == 'updated_at')
+                               @if($album_order == 'updated_at')
                                checked
                                @endif/>
                         <label for="1">по новизне</label>
@@ -20,7 +20,7 @@
                     <div>
                         <input type="radio" id="2"
                                name="albums" value="name"
-                               @if(Cookie::get('albums') == 'name')
+                               @if($album_order == 'name')
                                checked
                                 @endif/>
                         <label for="2">по алфавиту</label>
@@ -28,7 +28,7 @@
                     <div>
                         <input type="radio" id="3"
                                name="albums" value="id"
-                               @if(Cookie::get('albums') == 'id')
+                               @if($album_order == 'id')
                                checked
                                 @endif/>
                         <label for="3">по ID</label>
@@ -39,7 +39,7 @@
                     <div>
                         <input type="radio" id="4"
                                name="photos" value="created_at"
-                               @if(Cookie::get('photos') == 'created_at')
+                               @if($photo_order == 'created_at')
                                checked
                                 @endif/>
                         <label for="4">по новизне</label>
@@ -47,7 +47,7 @@
                     <div>
                         <input type="radio" id="5"
                                name="photos" value="name"
-                               @if(Cookie::get('photos') == 'name')
+                               @if($photo_order == 'name')
                                checked
                                 @endif/>
                         <label for="5">по алфавиту</label>
@@ -55,7 +55,7 @@
                     <div>
                         <input type="radio" id="6"
                                name="photos" value="id"
-                               @if(Cookie::get('photos') == 'id')
+                               @if($photo_order == 'id')
                                checked
                                 @endif/>
                         <label for="6">по ID</label>
