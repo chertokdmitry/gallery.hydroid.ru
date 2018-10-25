@@ -4,19 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
 use App\Album;
-
+use Illuminate\Support\Facades\Cookie;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $items = Album::with('photos')->paginate(9);
+        $direction = 'desc';
 
-        foreach ($items as $item) {
+        $items = Album::with('photos')
+            ->orderBy(Cookie::get('albums'), $direction)
+            ->paginate(9);
 
-            $photo = $item->photos->last();
-
-        }
         $view = view('main', ['items' => $items])->render();
         return (new Response($view));
     }
