@@ -13,66 +13,104 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
-
-    <title>Gallery</title>
+    <link href="{{ asset('public/css/album.css') }}" rel="stylesheet" type="text/css" >
+    <title>Laravel Album</title>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Photo Gallery</a>
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
-        @if (Route::has('login'))
-            <div class="top-right links">
-                @auth
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/albums/create">Новый альбом</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/home">Альбомы</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin">Настройки</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">Выйти</a>
-                        </li>
-                    </ul>
-                @else
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"  href="{{ route('register') }}">Register</a>
-                        </li>
-                    </ul>
-                @endauth
+<header>
+    <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">Возможности</h4>
+                    <p class="text-muted">Сделайте свой собственный сайт за несколько минут. Создайте и опубликуйте свои лучшие фотографии. Вы можете добавить описание к альбому и к каждому снимку, выбрать порядок показа.</p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+
+
+                    @if (Route::has('login'))
+
+                            @auth
+                                <ul class="list-unstyled">
+                                    <li class="nav-item">
+                                        <a class="text-white" href="/albums/create">Новый альбом</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="text-white" href="/home">Альбомы</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="text-white" href="/admin">Настройки</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="text-white" href="/logout">Выйти</a>
+                                    </li>
+                                </ul>
+                            @else
+                                <ul class="list-unstyled">
+                                    <li class="nav-item">
+                                        <a class="text-white"  href="{{ route('login') }}">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="text-white"  href="{{ route('register') }}">Register</a>
+                                    </li>
+                                </ul>
+                            @endauth
+
+                    @endif
+
+                </div>
             </div>
-        @endif
-
-
-
-
+        </div>
     </div>
-</nav><br>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a href="/" class="navbar-brand d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                <strong>Laravel Album</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main role="main">
+
+    <section class="jumbotron text-center" style="background-color:#fff">
+        <div class="container">
+            <h1 class="jumbotron-heading">Фотогалерея на Laravel</h1>
+            <p class="lead text-muted">Сервис для публикации изображений. В панели управления есть возможность создания альбома, загрузки фотографий, добавление описания. Можно настроить порядок сортировки.</p>
+            <p>
+                @if (Route::has('login'))
+
+                    @auth
+                        <a href="/albums/create" class="btn btn-success my-2">Новый альбом</a>
+                        <a href="/home" class="btn btn-primary my-2">Альбомы</a>
+                        <a href="/admin" class="btn btn-warning my-2">Настройки</a>
+                        <a href="/logout" class="btn btn-secondary my-2">Выйти</a>
+                    @else
+                <a href="{{ route('login') }}" class="btn btn-primary my-2">Login</a>
+                <a href="{{ route('register') }}" class="btn btn-secondary my-2">Register</a>
+
+                    @endauth
+
+                @endif
+            </p>
+        </div>
+    </section>
 
 @show
-<div class="container">
+    <div class="album py-5 bg-light">
+        <div class="container">
         @section('content')
 
         @show
-</div>
+        </div>
+    </div>
+
 @section('footer')
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

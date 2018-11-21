@@ -30,11 +30,15 @@
                 @foreach ($items as $item)
                     <div class="card" style="min-width: 240px;">
                         <div class="card-body mr-10">
-                            <img class="card-img-top" src="/public/photos/{{ $item['url'] }}">
+
+                            <img class="card-img-top" style="max-width:210px;" src="/public/photos/{{ $item['url'] }}">
                             <br><br>
                             <h6 class="card-title">
-                                <a href="/video/{{ $item['id'] }}">{{ $item['name'] }}</a>
+                                {{ $item['name'] }}
                             </h6>
+                            <a class="btn btn-danger btn-sm" href="/photos/delete/{{ $item['id'] }}/{{ $album }}">
+                                X
+                            </a>
                         </div>
                     </div>
                 @endforeach

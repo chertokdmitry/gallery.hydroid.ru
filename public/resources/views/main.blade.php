@@ -1,32 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content">
-        <div class="card-deck" style="margin-bottom: 1rem;">
+    <div class="row">
+
             @foreach ($items as $item)
 
                 @if ($photo = $item->photos->last()) @endif
 
-                @if (($loop->index % 3) == 0)
-        </div><div class="card-deck" style="margin-bottom: 1rem;">
-                @endif
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src="/public/photos/{{ $photo['url'] }}" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">{{ $item->name }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="/album/{{ $item->id }}" class="btn btn-sm btn-outline-secondary">Просмотр</a>
 
-                <div class="card" style="min-width: 240px;
-                border-color: #fff; ">
-                    <div class="card-body mr-10">
-                        <img class="card-img-top" src="/public/photos/{{ $photo['url'] }}">
-                        <br><br>
-                        <h6 class="card-title">
-                            <a href="/album/{{ $item->id }}">{{ $item->name }}</a>
-                            ({{ $item->photos->count() }})
-                        </h6>
-                        <p class="card-text">
-
-                        </p>
+                            </div>
+                            <small class="text-muted"> {{ $item->photos->count() }}</small>
+                        </div>
                     </div>
                 </div>
+            </div>
+
             @endforeach
-        </div>
     </div>
+
     {{ $items->links() }}
 @endsection

@@ -19,7 +19,7 @@ Route::resource('/home', 'Admin\AlbumsResource')->middleware('auth');
 Route::resource('/albums', 'Admin\AlbumsResource')->middleware('auth');
 
 Route::resource('/photos', 'Admin\PhotosResource')->middleware('auth');
-
+Route::get('/photos/delete/{id}/{album}', 'Admin\PhotosResource@destroy')->middleware('auth');
 Route::get('/albums/view/{id}', 'Admin\AlbumsResource@view')->middleware('auth');
 
 Route::get('/admin', 'Admin\ConfigController@index')->middleware('auth');

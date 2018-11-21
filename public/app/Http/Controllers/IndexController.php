@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
-use App\Album;
+use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        $direction = 'desc';
+        $album_order = 'id';
 
+        if(Auth::user()) {
+
+            $user = Auth::user();
+            $album_order = $user->album_order ? $user->album_order : 'id';
+        }
         $items = Album::with('photos')
-            ->orderBy($user->album_order, $direction)
+            ->orderBy($album_order)
             ->paginate(9);
 
         $view = view('main', ['items' => $items])->render();

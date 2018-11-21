@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Photo;
-use App\Album;
+use App\Models\Photo;
 
 class PhotosResource extends Controller
 {
@@ -41,7 +40,7 @@ class PhotosResource extends Controller
         $request->userfile->move(public_path('photos'), $photoName);
 
         $item = new Photo;
-        $item->name = $request->name;
+        $item->name = $request->title;
         $item->url = $photoName;
         $item->album_id = $request->album;
         $item->save();
@@ -89,8 +88,11 @@ class PhotosResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $album)
     {
-        //
+        $photo = Photo::find($id);
+        $photo->delete();
+
+        return redirect('/albums/view/'. $album);
     }
 }

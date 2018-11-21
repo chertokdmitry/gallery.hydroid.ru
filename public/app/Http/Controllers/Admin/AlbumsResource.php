@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Album;
-use App\Photo;
+use App\Models\Album;
+use App\Models\Photo;
 
 class AlbumsResource extends Controller
 {
